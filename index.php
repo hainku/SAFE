@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>SAFE - Landing Page</title>
         <?php include_once 'Res/includes.php'; ?>
-
         <style>
             .carousel-item img {
             width: 100%;
@@ -42,6 +41,32 @@
             .modal-body {
             background: #f9f9f9;
             border-radius: 10px;
+            }
+
+            @media (max-width: 768px) {
+                .carousel-caption h2 {
+                    font-size: 1.5rem;
+                }
+                .carousel-caption p {
+                    font-size: 1rem;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .carousel-caption {
+                    padding: 1rem;
+                }
+                .carousel-caption h2 {
+                    font-size: 1.25rem;
+                }
+                .carousel-caption p {
+                    font-size: 0.9rem;
+                }
+                .btn-lg {
+                    display: block;
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
             }
         </style>
     </head>
