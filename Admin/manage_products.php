@@ -1,5 +1,4 @@
 <?php 
-
     function generateProductID($length = 5) {
         $random = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, $length);
         return "PRODUCT-" . $random; 
@@ -21,11 +20,9 @@
         $ingredients=$_POST['ingredients'];
         $nutritionfacts=$_POST['nutritionFacts'];
 
-        $data=$u->addproducts($productID,$productCode,$productname,$description,$price,$ingredients,$nutritionfacts); 
-
         echo'
 			<script>
-				alert("'.$u->addproducts($productID,$productCode,$productname,$description,$price,$ingredients,$nutritionfacts).'");
+				alert("'.$u->addproducts($productID,$productname,$description,$price,$ingredients,$nutritionfacts).'");
 			</script>
 		';
     } 
@@ -55,25 +52,24 @@
                     </button>
                 </div>
             </div>
+            <div class="row g-4 mt-5">
             <?php
-                $data=$u->displayproducts($productID);
+                $data=$u->displayproducts();
                 while($row = $data->fetch_assoc()){
                     echo'
-                    
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="card h-100 shadow-sm">
+                                <img src="../Res/images/2.webp" class="card-img-top" alt="Product 1">
+                                <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">'.$row['ProductName'].'</h5>
+                                <p class="card-text text-muted">'.substr($row['Description'], 0, 100) . (strlen($row['Description']) > 100 ? '...' : '').'</p>
+                                <button class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#viewProductModal">View</button>
+                                </div>
+                            </div>
+                        </div>
                     ';
                 }
             ?>
-            <div class="row g-4 mt-5">
-                <div class="col-sm-6 col-md-4 col-lg-3">
-                    <div class="card h-100 shadow-sm">
-                        <img src="../Res/images/2.webp" class="card-img-top" alt="Product 1">
-                        <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Product 1</h5>
-                        <p class="card-text text-muted">Category: Electronics</p>
-                        <button class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#viewProductModal">View</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </body>
