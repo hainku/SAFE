@@ -131,9 +131,9 @@
 
 
         <section class="text-center my-5">
-            <button type="button" class="btn btn-success btn-lg me-3 shadow">
+            <a href="scan.php"><button type="button" class="btn btn-success btn-lg me-3 shadow">
                 <i class="fas fa-qrcode"></i> Scan Product
-            </button>
+            </button></a>
             <button type="button" class="btn btn-primary btn-lg shadow" data-bs-toggle="modal" data-bs-target="#adminLoginModal">
                 <i class="fas fa-user-shield"></i> Admin Login
             </button>
