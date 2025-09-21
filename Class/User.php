@@ -6,20 +6,5 @@ Class User extends Database{
         $data=$this->conn->query($sql);
         return $data;
     }
-    public function addproducts($productID,$productname,$description,$price,$ingredients,$nutritionfacts){
-		$date=date('Y-m-d');
-		$time=date('H:i:s');
-        $sql="insert into tblproducts values(NULL,'$productID','$productname','$description','$price','$ingredients','$nutritionfacts','$date')";
-		if($this->conn->query($sql)){
-			return 'Product Added';
-		}else{
-			return $this->conn->error;
-		}
-	}
-    public function displayproducts(){
-		$sql="select * from tblproducts";
-		$data=$this->conn->query($sql);
-		return $data;
-	}
 }
 ?>
