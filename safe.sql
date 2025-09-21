@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 21, 2025 at 08:10 AM
+-- Generation Time: Sep 21, 2025 at 09:35 AM
 -- Server version: 8.0.34
 -- PHP Version: 8.2.11
 
@@ -88,10 +88,10 @@ INSERT INTO `tblproducts` (`id`, `ProductID`, `ProductName`, `Description`, `Pri
 
 CREATE TABLE `tblqrcode` (
   `id` int NOT NULL,
-  `ProductID` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `ProductCode` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `ProductID` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ProductCode` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `DateGenerated` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tblqrcode`

@@ -43,8 +43,18 @@
     { facingMode: "environment" }, // back camera
     { fps: 10, qrbox: 250 },
     (decodedText, decodedResult) => {
-      console.log("QR Code:", decodedText);
-      alert("Scanned: " + decodedText);
+      //console.log("QR Code:", decodedText);
+      //alert("Scanned: " + decodedText);
+        /*var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                alert(this.responseText);
+            }
+        };
+        xhttp.open("GET", "Request/authenticateqrcode.php?pcode="+decodedText, true);
+        xhttp.send();*/
+        window.open("User/scanresult.php?pcode="+decodedText,"_self");
+
     }
   ).catch(err => console.error(err));
 </script>
