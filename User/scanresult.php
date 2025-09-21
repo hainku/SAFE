@@ -81,6 +81,11 @@
                             <span class="fw-bold">Nutrition Facts:</span> <span class="fst-bold"><?=$nutritionfacts;?></span>
                         </div>
                     </div>
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-md-3">
+                            <a href="../scan.php"><button class="form-control btn btn-primary"><i class="fa-solid fa-backward"></i> Back</button></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

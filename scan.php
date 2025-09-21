@@ -27,9 +27,9 @@
                 <h3 class="bg-primary text-white p-3"><i class="fa-solid fa-camera"></i> Scan Me</h3>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4 text-end">
-                <button class="btn btn-success form-control"><i class="fa-solid fa-rotate-left"></i> Back</button>
+        <div class="row justify-content-center">
+            <div class="col-md-5 text-end">
+                <a href="index.php"><button class="btn btn-success form-control"><i class="fa-solid fa-rotate-left"></i> Back</button></a>
             </div>
         </div>
     </div>
