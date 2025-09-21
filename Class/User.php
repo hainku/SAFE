@@ -9,16 +9,15 @@ Class User extends Database{
     public function addproducts($productID,$productCode,$productname,$description,$price,$ingredients,$nutritionfacts){
 		$date=date('Y-m-d');
 		$time=date('H:i:s');
-        $sql="insert into tblproducts values(NULL,'$productID','$productname','$description','$price','$ingredients','$nutritionfacts','$date');";
-		$sql.="insert into tblqrcode values(NULL,'$productID','$productCode')";
-		if($this->conn->multi_query($sql)){
+        $sql="insert into tblproducts values(NULL,'$productID','$productname','$description','$price','$ingredients','$nutritionfacts','$date')";
+		if($this->conn->query($sql)){
 			return 'Product Added';
 		}else{
 			return $this->conn->error;
 		}
 	}
-    public function displayproducts($productID){
-		$sql="select * from tblproducts where ProductID='$productID'";
+    public function displayproducts(){
+		$sql="select * from tblproducts";
 		$data=$this->conn->query($sql);
 		return $data;
 	}
