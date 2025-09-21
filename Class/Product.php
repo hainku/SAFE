@@ -21,6 +21,11 @@ Class Product extends Database{
 		$data=$this->conn->query($sql);
 		return $data;
     }
+    public function displayproductbypcode($pcode){
+        $sql="select p.* from tblproducts p inner join tblqrcode q on p.ProductID=q.ProductID where q.ProductCode='$pcode'";
+		$data=$this->conn->query($sql);
+		return $data;
+    }
     public function saveqrcode($pid,$qrcode){
         $val="";
         $date=date('Y-m-d H:i:s');
@@ -34,6 +39,11 @@ Class Product extends Database{
         }else{
             return $this->conn->error;
         }
+    }
+    public function authenticate($qrcode){
+        $sql="select * from tblqrcode where  ProductCode='$qrcode'";
+        $data=$this->conn->query($sql);
+        return $data;
     }
 }
 ?>

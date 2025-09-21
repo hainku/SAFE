@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SAFE-Scan Product</title>
     <script src="Res/qrcode/html5-qrcode.min.js"></script>
     <?php
         include_once'Res/includes.php';
@@ -43,8 +43,18 @@
     { facingMode: "environment" }, // back camera
     { fps: 10, qrbox: 250 },
     (decodedText, decodedResult) => {
-      console.log("QR Code:", decodedText);
-      alert("Scanned: " + decodedText);
+      //console.log("QR Code:", decodedText);
+      //alert("Scanned: " + decodedText);
+        /*var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                alert(this.responseText);
+            }
+        };
+        xhttp.open("GET", "Request/authenticateqrcode.php?pcode="+decodedText, true);
+        xhttp.send();*/
+        window.open("User/scanresult.php?pcode="+decodedText,"_self");
+
     }
   ).catch(err => console.error(err));
 </script>
