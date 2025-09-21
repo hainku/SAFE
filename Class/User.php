@@ -6,7 +6,7 @@ Class User extends Database{
         $data=$this->conn->query($sql);
         return $data;
     }
-    public function addproducts($productID,$productCode,$productname,$description,$price,$ingredients,$nutritionfacts){
+    public function addproducts($productID,$productname,$description,$price,$ingredients,$nutritionfacts){
 		$date=date('Y-m-d');
 		$time=date('H:i:s');
         $sql="insert into tblproducts values(NULL,'$productID','$productname','$description','$price','$ingredients','$nutritionfacts','$date')";

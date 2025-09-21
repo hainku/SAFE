@@ -22,7 +22,7 @@
 
         echo'
 			<script>
-				alert("'.$u->addproducts($productID,$productCode,$productname,$description,$price,$ingredients,$nutritionfacts).'");
+				alert("'.$u->addproducts($productID,$productname,$description,$price,$ingredients,$nutritionfacts).'");
 			</script>
 		';
     } 
