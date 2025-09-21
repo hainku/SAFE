@@ -20,8 +20,6 @@
         $ingredients=$_POST['ingredients'];
         $nutritionfacts=$_POST['nutritionFacts'];
 
-        $data=$u->addproducts($productID,$productCode,$productname,$description,$price,$ingredients,$nutritionfacts); 
-
         echo'
 			<script>
 				alert("'.$u->addproducts($productID,$productCode,$productname,$description,$price,$ingredients,$nutritionfacts).'");
