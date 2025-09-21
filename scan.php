@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SAFE-Scan Product</title>
     <script src="Res/qrcode/html5-qrcode.min.js"></script>
     <?php
         include_once'Res/includes.php';
