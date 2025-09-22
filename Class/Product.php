@@ -58,5 +58,45 @@ Class Product extends Database{
         $data=$this->conn->query($sql);
         return $data;
     }
+    public function uploadphoto($img, $target_dir, $newfilename) {
+        $uploadOk = 1;
+
+        // Get file extension
+        $imageFileType = strtolower(pathinfo($img["name"], PATHINFO_EXTENSION));
+
+        // Construct new target file with new filename + extension
+        $target_file = rtrim($target_dir, "/") . "/" . $newfilename . "." . $imageFileType;
+
+        // Check if file already exists
+        if (file_exists($target_file)) {
+            $uploadOk = 0;
+            return "Sorry, file already exists.";
+        }
+
+        // Check file size (500KB limit)
+        if ($img["size"] > 500000) {
+            $uploadOk = 0;
+            return "Sorry, your file is too large.";
+        }
+
+        // Allow certain file formats
+        if (!in_array($imageFileType, ["jpg", "jpeg", "png", "gif"])) {
+            $uploadOk = 0;
+            return "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        }
+
+        // Final upload
+        if ($uploadOk == 0) {
+            return "Sorry, your file was not uploaded.";
+        } else {
+            if (move_uploaded_file($img["tmp_name"], $target_file)) {
+                //return "The file " . basename($target_file) . " has been uploaded.";
+                return 'success';
+            } else {
+                return "Sorry, there was an error uploading your file.";
+            }
+        }
+    }
+
 }
 ?>
