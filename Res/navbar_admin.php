@@ -13,20 +13,16 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Manage Products
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-                        <li><a class="dropdown-item" href="#">Add Product</a></li>
-                        <li><a class="dropdown-item" href="#">Product Lists</a></li>
-                        <li><a class="dropdown-item" href="#">Products Report</a></li>
-                    </ul>
+                    <a class="nav-link" href="admin_homepage.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Manage User</a>
+                    <a class="nav-link" href="view_products.php">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="manage_users.php">Manage User</a>
+                </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
                 </li>
             </ul>
 
@@ -36,7 +32,7 @@
                         Account
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li><a class="dropdown-item" href="../Admin/logout.php">Logout</a></li>
                         <li><a class="dropdown-item" href="#">Change Password</a></li>
                     </ul>
                 </li>

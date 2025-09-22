@@ -1,17 +1,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Homepage</title>
+    <title>Inventory Clerk Homepage</title>
     <?php include_once '../Res/includes.php'; ?>
-    <?php include_once '../Res/navbar_admin.php'; ?>
+    <?php include_once '../Res/navbar_clerk.php'; ?>
 </head>
 
 DASHBOARD <br>
-1. Total Scans<br>
+1. Total Product<br>
 2. Authentic Product Scans Percentage<br>
 3. Fake Product Scans Percentage<br><br>
 
-Bar Graph of authentic vs fake scans<br>
-Tabled Real Time Data History of Scans (Paginated)<br>
-Filter Data History<br>
+Llst of products
+Filter Products<br>
 

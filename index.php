@@ -179,10 +179,11 @@
         if($row = $data->fetch_assoc()){ 
             if($row['Role']=='admin'){ 
                 echo' <script> window.open("Admin/admin_homepage.php","_self"); </script> '; 
+            }else if($row['Role']=='clerk'){ 
+                echo' <script> window.open("Clerk/clerk_homepage.php","_self"); </script> '; 
             } 
-            
-        }else{ 
-            echo' <script> alert("Invalid Username and Password"); </script> '; 
+            }else{ 
+                echo' <script> alert("Invalid Username and Password"); </script> '; 
+            } 
         } 
-    } 
 ?>
