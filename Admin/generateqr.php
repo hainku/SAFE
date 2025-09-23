@@ -80,5 +80,8 @@
             xhttp.open("GET", "../Request/saveqrcode.php?pid="+pid+"&qrcode="+JSON.stringify(qrcode), true);
             xhttp.send();
         });
+        document.getElementById("btnprint").addEventListener("click",function(){
+            window.open("../Report/printqr.php","_new");
+        });
     });
 </script>

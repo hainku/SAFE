@@ -23,6 +23,8 @@
             $nutritionfacts=$row['NutritionFacts'];
             $status='Authentic';
             $color='text-success';
+            $img=$row['Image'];
+            $img=$img==''?'default-product.png':$row['Image'];
             
         }else{
             $pname='Undefined!';
@@ -53,7 +55,7 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-md-10">
-                            <img src="../Res/images/3.jpg" class="w-100" alt="Product">
+                            <img src="../Res/images/<?=$img?>" class="w-100" alt="Product">
                         </div>
                     </div>
                     <div class="row justify-content-center">
