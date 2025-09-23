@@ -97,6 +97,11 @@ Class Product extends Database{
             }
         }
     }
+    public function printqr(){
+        $sql="select q.ProductCode,p.ProductName from tblqrcode q inner join tblproducts p on p.ProductID=q.ProductID";
+        $data=$this->conn->query($sql);
+        return $data;
+    }
 
 }
 ?>
