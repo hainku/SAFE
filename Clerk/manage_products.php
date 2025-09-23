@@ -20,11 +20,16 @@
         $ingredients=$_POST['ingredients'];
         $nutritionfacts=$_POST['nutritionFacts'];
         $img=$_FILES['prodPhoto'];
+        $imageFileType = strtolower(pathinfo($img["name"], PATHINFO_EXTENSION));
+        $imageName = $productID.'.'.$imageFileType;
 
-        $res= $p->uploadphoto($img,'Res/images/',$productID);
+        $res= $p->uploadphoto($img,'../Res/images/',$productID);
         if($res=='success'){
-            echo'SAVE MO DATA';
-            
+            echo'
+                <script>
+                    alert("'.$p->addproducts($productID,$productname,$description,$price,$ingredients,$nutritionfacts,$imageName).'");
+                </script>
+            ';
         }else{
             echo $res;
         }
@@ -58,10 +63,11 @@
             <?php
                 $data=$p->displayproducts();
                 while($row = $data->fetch_assoc()){
+                    $image = !empty($row['Image']) ? $row['Image'] : '2.webp';
                     echo'
                         <div class="col-sm-6 col-md-4 col-lg-3">
                             <div class="card h-100 shadow-sm">
-                                <img src="../Res/images/2.webp" class="card-img-top" alt="Product 1">
+                                <img src="../Res/images/'.$image.'" class="card-img-top" alt="Product 1">
                                 <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">'.$row['ProductName'].'</h5>
                                 <p class="card-text text-muted">'.substr($row['Description'], 0, 100) . (strlen($row['Description']) > 100 ? '...' : '').'</p>
