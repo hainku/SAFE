@@ -1,3 +1,32 @@
+<?php 
+session_start(); 
+
+include_once 'Class/User.php'; 
+$u = new User(); 
+
+if (isset($_POST['btnlogin'])) { 
+    $un = $_POST['username']; 
+    $pw = $_POST['password']; 
+
+    $data = $u->login($un, $pw); 
+
+    if ($row = $data->fetch_assoc()) { 
+        // Save user info into session
+        $_SESSION['UserID'] = $row['UserID']; 
+        $_SESSION['Username'] = $row['Username']; 
+        $_SESSION['Role'] = $row['Role']; 
+
+        if ($row['Role'] == 'admin') { 
+            echo '<script>window.open("Admin/admin_homepage.php","_self");</script>'; 
+        } else if ($row['Role'] == 'clerk') { 
+            echo '<script>window.open("Clerk/clerk_homepage.php","_self");</script>'; 
+        } 
+    } else { 
+        echo '<script>alert("Invalid Username and Password");</script>'; 
+    } 
+} 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -167,23 +196,3 @@
     </body>
 </html>
 
-<?php 
-    include_once'Class/User.php'; 
-    $u=new User(); 
-    if(isset($_POST['btnlogin'])){ 
-        $un=$_POST['username']; 
-        $pw=$_POST['password']; 
-
-        $data=$u->login($un,$pw); 
-
-        if($row = $data->fetch_assoc()){ 
-            if($row['Role']=='admin'){ 
-                echo' <script> window.open("Admin/admin_homepage.php","_self"); </script> '; 
-            }else if($row['Role']=='clerk'){ 
-                echo' <script> window.open("Clerk/clerk_homepage.php","_self"); </script> '; 
-            } 
-            }else{ 
-                echo' <script> alert("Invalid Username and Password"); </script> '; 
-            } 
-        } 
-?>

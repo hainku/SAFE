@@ -1,3 +1,10 @@
+<?php
+  session_start();
+    if(!isset($_SESSION['UserID'])){
+        header('Location:../index.php');
+    }else{
+  }
+?>
 <?php 
     function generateProductID($length = 5) {
         $random = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, $length);
@@ -45,11 +52,6 @@
                     </form>
                 </div>
                 
-                <div class="col-md-6 text-md-end text-center">
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">
-                        <i class="bi bi-plus-circle"></i> Add Product
-                    </button>
-                </div>
             </div>
             <div class="row g-4 mt-5" id="productlist">
             <?php
@@ -73,49 +75,6 @@
         </div>
     </body>
 </html>
-
-<!-- Add Product Modal -->
-<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="addProductModalLabel">Add Product</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form method="POST">
-                    <div class="mb-3">
-                        <label for="productName" class="form-label">Product Name</label>
-                        <input type="text" class="form-control" id="productName" name="productName" required>
-                    </div>
-                    <div class="mb-3">
-                        <!--label for="productImage" class="form-label">Product Image</label-->
-                        <input class="form-control" type="hidden" id="productImage">
-                    </div>
-                    <div class="mb-3">
-                        <label for="productDescription" class="form-label">Description</label>
-                        <textarea class="form-control" id="productDescription" name="productDescription" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productDescription" class="form-label">Price</label>
-                        <input type="number" class="form-control" id="price" name="price" rows="3">
-                    </div>
-                    <div class="mb-3">
-                        <label for="productDescription" class="form-label">Ingredients</label>
-                        <textarea class="form-control" id="ingredients" name="ingredients" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productDescription" class="form-label">Nutrition Facts</label>
-                        <textarea class="form-control" id="nutritionFacts" name="nutritionFacts" rows="3"></textarea>
-                    </div>
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-success" name="btnaddproduct">Save Product</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- View Product Modal -->
 <div class="modal fade" id="viewProductModal" tabindex="-1" aria-labelledby="viewProductModalLabel" aria-hidden="true">

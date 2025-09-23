@@ -1,3 +1,11 @@
+<?php
+  session_start();
+    if(!isset($_SESSION['UserID'])){
+        header('Location:../index.php');
+    }else{
+  }
+?>
+
 <?php 
     function generateProductID($length = 5) {
         $random = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, $length);
