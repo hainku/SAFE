@@ -19,12 +19,15 @@
         $price=$_POST['price'];
         $ingredients=$_POST['ingredients'];
         $nutritionfacts=$_POST['nutritionFacts'];
+        $img=$_FILES['prodPhoto'];
 
-        echo'
-			<script>
-				alert("'.$p->addproducts($productID,$productname,$description,$price,$ingredients,$nutritionfacts).'");
-			</script>
-		';
+        $res= $p->uploadphoto($img,'Res/images/',$productID);
+        if($res=='success'){
+            echo'SAVE MO DATA';
+            
+        }else{
+            echo $res;
+        }
     } 
 ?>
 <!DOCTYPE html>
@@ -83,7 +86,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="productName" class="form-label">Product Name</label>
                         <input type="text" class="form-control" id="productName" name="productName" required>
@@ -110,7 +113,7 @@
                     </div>
                     </div> <div class="mb-3">
                         <label for="productDescription" class="form-label">Product Photo</label>
-                        <input type="file" class="form-control" id="prodhoto" name="prodPhoto" rows="3"></input>
+                        <input type="file" class="form-control" id="prodPhoto" name="prodPhoto" accept="image/*">
                     </div>
                     <div class="d-grid">
                         <button type="submit" class="btn btn-success" name="btnaddproduct">Save Product</button>

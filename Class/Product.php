@@ -1,10 +1,10 @@
 <?php
 require_once'Database.php';
 Class Product extends Database{
-    public function addproducts($productID,$productname,$description,$price,$ingredients,$nutritionfacts){
+    public function addproducts($productID,$productname,$description,$price,$ingredients,$nutritionfacts,$img){
 		$date=date('Y-m-d');
 		$time=date('H:i:s');
-        $sql="insert into tblproducts values(NULL,'$productID','$productname','$description','$price','$ingredients','$nutritionfacts','$date')";
+        $sql="insert into tblproducts values(NULL,'$productID','$productname','$description','$price','$ingredients','$nutritionfacts','$img','$date')";
 		if($this->conn->query($sql)){
 			return 'Product Added';
 		}else{
