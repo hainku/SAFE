@@ -21,7 +21,7 @@
                     </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
                             <li><a class="dropdown-item" href="manage_products.php">Product Lists</a></li>
-                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addProductModal">Add Product</a></li>
+                             <li><a class="dropdown-item">Add Product</a></li>
                             <li><a class="dropdown-item" href="#">Products Report</a></li>
                         </ul>
                 <li class="nav-item">
@@ -44,48 +44,3 @@
     </div>
 </nav>
 
-<!-- Add Product Modal -->
-<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title fw-bold" id="addProductModalLabel">Add Product</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <form method="POST">
-                    <div class="mb-3">
-                        <label for="productName" class="form-label">Product Name</label>
-                        <input type="text" class="form-control" id="productName" name="productName" required>
-                    </div>
-                    <div class="mb-3">
-                        <!--label for="productImage" class="form-label">Product Image</label-->
-                        <input class="form-control" type="hidden" id="productImage">
-                    </div>
-                    <div class="mb-3">
-                        <label for="productDescription" class="form-label">Description</label>
-                        <textarea class="form-control" id="productDescription" name="productDescription" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productDescription" class="form-label">Price</label>
-                        <input type="number" class="form-control" id="price" name="price" rows="3">
-                    </div>
-                    <div class="mb-3">
-                        <label for="productDescription" class="form-label">Ingredients</label>
-                        <textarea class="form-control" id="ingredients" name="ingredients" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productDescription" class="form-label">Nutrition Facts</label>
-                        <textarea class="form-control" id="nutritionFacts" name="nutritionFacts" rows="3"></textarea>
-                     </div> <div class="mb-3">
-                        <label for="productDescription" class="form-label">Product Photo</label>
-                        <input type="file" class="form-control" id="productPhoto" name="productPhoto" rows="3"></input>
-                    </div>
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-success" name="btnaddproduct">Save Product</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>

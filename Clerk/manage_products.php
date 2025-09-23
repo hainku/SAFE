@@ -20,11 +20,16 @@
         $ingredients=$_POST['ingredients'];
         $nutritionfacts=$_POST['nutritionFacts'];
         $img=$_FILES['prodPhoto'];
+        $imageFileType = strtolower(pathinfo($img["name"], PATHINFO_EXTENSION));
+        $imageName = $productID.'.'.$imageFileType;
 
-        $res= $p->uploadphoto($img,'Res/images/',$productID);
+        $res= $p->uploadphoto($img,'../Res/images/',$productID);
         if($res=='success'){
-            echo'SAVE MO DATA';
-            
+            echo'
+                <script>
+                    alert("'.$p->addproducts($productID,$productname,$description,$price,$ingredients,$nutritionfacts,$imageName).'");
+                </script>
+            ';
         }else{
             echo $res;
         }
