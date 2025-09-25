@@ -58,6 +58,61 @@ Class Product extends Database{
         $data=$this->conn->query($sql);
         return $data;
     }
+    public function displayscanhistory(){
+        $sql="select * from tblscanhistory";
+        $data=$this->conn->query($sql);
+        return $data;
+    }
+    public function getAuthenticPercentage() {
+        $sqlAuthentic = "select COUNT(*) as total_authentic from tblscanhistory where Status='1'";
+        $resAuth = $this->conn->query($sqlAuthentic);
+        $rowAuth = $resAuth->fetch_assoc();
+        $authentic = $rowAuth['total_authentic'];
+
+        $sqlTotal = "select COUNT(*) as total from tblscanhistory";
+        $resTotal = $this->conn->query($sqlTotal);
+        $rowTotal = $resTotal->fetch_assoc();
+        $total = $rowTotal['total'];
+
+        if ($total == 0) {
+            return 0;
+        }
+
+        return round(($authentic / $total) * 100, 2);
+    }
+    public function getFakePercentage() {
+        $sqlAuthentic = "select count(*) as total_authentic from tblscanhistory where Status='0'";
+        $resAuth = $this->conn->query($sqlAuthentic);
+        $rowAuth = $resAuth->fetch_assoc();
+        $authentic = $rowAuth['total_authentic'];
+
+        $sqlTotal = "select count(*) as total from tblscanhistory";
+        $resTotal = $this->conn->query($sqlTotal);
+        $rowTotal = $resTotal->fetch_assoc();
+        $total = $rowTotal['total'];
+
+        if ($total == 0) {
+            return 0;
+        }
+
+        return round(($authentic / $total) * 100, 2);
+    }
+
+    public function countAuthentic() {
+        $sql = "select count(*) as total from tblscanhistory where Status='1'";
+        $data = $this->conn->query($sql);
+        $row = $data->fetch_assoc();
+        return $row['total'];
+    }
+
+    public function countFake() {
+        $sql = "select count(*) as total from tblscanhistory where Status='0'";
+        $data = $this->conn->query($sql);
+        $row = $data->fetch_assoc();
+        return $row['total'];
+    }
+
+
     public function uploadphoto($img, $target_dir, $newfilename) {
         $uploadOk = 1;
 
