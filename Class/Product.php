@@ -12,7 +12,7 @@ Class Product extends Database{
 		}
 	}
     public function displayproducts(){
-		$sql="select * from tblproducts";
+		$sql="select * from tblproducts order by ProductName";
 		$data=$this->conn->query($sql);
 		return $data;
 	}
@@ -151,6 +151,26 @@ Class Product extends Database{
                 return "Sorry, there was an error uploading your file.";
             }
         }
+    }
+    public function printqr(){
+        $sql="select q.ProductCode,p.ProductName from tblqrcode q inner join tblproducts p on p.ProductID=q.ProductID";
+        $data=$this->conn->query($sql);
+        return $data;
+    }
+    public function savescan($productcode){
+        $date=date("Y-m-d H:i:s");
+        $sql="select * from tblqrcode where ProductCode='$productcode'";
+        $data=$this->conn->query($sql);
+        if($row=$data->fetch_assoc()){
+            $stat=1;
+        }else{
+            $stat=0;
+        }
+        $sql="insert into tblscanhistory values(NULL,'$productcode','$date','$stat')";
+        if($this->conn->query($sql)){
+            return 'Success';
+        }
+        
     }
 
 }

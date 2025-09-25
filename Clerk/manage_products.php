@@ -1,3 +1,11 @@
+<?php
+  session_start();
+    if(!isset($_SESSION['UserID'])){
+        header('Location:../index.php');
+    }else{
+  }
+?>
+
 <?php 
     function generateProductID($length = 5) {
         $random = substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, $length);
@@ -57,13 +65,18 @@
                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">
                         <i class="bi bi-plus-circle"></i> Add Product
                     </button>
+                    <a href="../Report/productlist.php" target="new">
+                        <button class="btn btn-secondary">
+                            <i class="bi bi-plus-circle"></i> Print Product List
+                        </button>
+                    </a>
                 </div>
             </div>
             <div class="row g-4 mt-5" id="productlist">
             <?php
                 $data=$p->displayproducts();
                 while($row = $data->fetch_assoc()){
-                    $image = !empty($row['Image']) ? $row['Image'] : '2.webp';
+                    $image = !empty($row['Image']) ? $row['Image'] : 'default-product.png';
                     echo'
                         <div class="col-sm-6 col-md-4 col-lg-3">
                             <div class="card h-100 shadow-sm">
