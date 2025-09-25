@@ -88,7 +88,7 @@
             </div>
             <div class="modal-body overflow-auto" style="max-height: 60vh;">
                 <div class="container">
-                    <img src="../Res/images/2.webp" class="img-fluid rounded mb-3" alt="Product Image">
+                    <img id="img_edit" src="../Res/images/default-product.png" class="img-fluid rounded mb-3" alt="Product Image">
                     <h5 id="pname">Product Name</h5>
                     <input type="text" id="pname_edit" class="form-control d-none"/>
                     <span class="fst-italic" id="prodid" style="display:block; margin-top:-0.7em; display:none;"><small>Product ID</small></span>
@@ -139,6 +139,9 @@
             document.getElementById("pprice").innerHTML=data[0]["Price"];
             document.getElementById("pingredients").innerHTML=data[0]["Ingredients"];
             document.getElementById("pnutrifacts").innerHTML=data[0]["NutritionFacts"];
+            const imge=data[0]["Image"];
+            if(imge==""){imge="default-product.png";}
+            document.getElementById("img_edit").src="../Res/images/"+imge;
         }
     };
     xhttp.open("GET", "../Request/searchproduct.php?pid="+pid, true);
