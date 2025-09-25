@@ -1,3 +1,10 @@
+<?php
+  session_start();
+    if(!isset($_SESSION['UserID'])){
+        header('Location:../index.php');
+    }else{
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,6 +86,9 @@
             };
             xhttp.open("GET", "../Request/saveqrcode.php?pid="+pid+"&qrcode="+JSON.stringify(qrcode), true);
             xhttp.send();
+        });
+        document.getElementById("btnprint").addEventListener("click",function(){
+            window.open("../Report/printqr.php","_new");
         });
     });
 </script>
