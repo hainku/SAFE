@@ -45,15 +45,15 @@
     (decodedText, decodedResult) => {
       //console.log("QR Code:", decodedText);
       //alert("Scanned: " + decodedText);
-        /*var xhttp = new XMLHttpRequest();
+        var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                alert(this.responseText);
+                //alert(this.responseText);
+                window.open("User/scanresult.php?pcode="+decodedText,"_self");
             }
         };
-        xhttp.open("GET", "Request/authenticateqrcode.php?pcode="+decodedText, true);
-        xhttp.send();*/
-        window.open("User/scanresult.php?pcode="+decodedText,"_self");
+        xhttp.open("GET", "Request/savescan.php?productcode="+decodedText, true);
+        xhttp.send();
 
     }
   ).catch(err => console.error(err));

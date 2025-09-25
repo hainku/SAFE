@@ -102,6 +102,21 @@ Class Product extends Database{
         $data=$this->conn->query($sql);
         return $data;
     }
+    public function savescan($productcode){
+        $date=date("Y-m-d H:i:s");
+        $sql="select * from tblqrcode where ProductCode='$productcode'";
+        $data=$this->conn->query($sql);
+        if($row=$data->fetch_assoc()){
+            $stat=1;
+        }else{
+            $stat=0;
+        }
+        $sql="insert into tblscanhistory values(NULL,'$productcode','$date','$stat')";
+        if($this->conn->query($sql)){
+            return 'Success';
+        }
+        
+    }
 
 }
 ?>
