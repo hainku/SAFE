@@ -21,8 +21,8 @@
                     </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
                             <li><a class="dropdown-item" href="manage_products.php">Product Lists</a></li>
-                             <li><a class="dropdown-item">Add Product</a></li>
-                            <li><a class="dropdown-item" href="#">Products Report</a></li>
+                             <!--li><a class="dropdown-item">Add Product</a></li>
+                            <li><a class="dropdown-item" href="#">Products Report</a></li-->
                         </ul>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About Us</a>

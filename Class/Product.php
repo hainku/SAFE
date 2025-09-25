@@ -12,7 +12,7 @@ Class Product extends Database{
 		}
 	}
     public function displayproducts(){
-		$sql="select * from tblproducts";
+		$sql="select * from tblproducts order by ProductName";
 		$data=$this->conn->query($sql);
 		return $data;
 	}
