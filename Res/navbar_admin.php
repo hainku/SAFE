@@ -33,10 +33,13 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
                         <li><a class="dropdown-item" href="../Admin/logout.php">Logout</a></li>
-                        <li><a class="dropdown-item" href="#">Change Password</a></li>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#changepassword">Change Password</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+<?php
+include_once'changepassword.php';
+?>
