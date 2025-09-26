@@ -24,5 +24,21 @@ Class User extends Database{
             return 'Password Incorrect!';
         }
     }
+    public function adduser($userID,$firstname,$lastname,$middlename,$email,$bdate,$address,$contact){
+		$date=date('Y-m-d');
+		$time=date('H:i:s');
+        $dateadded = $date.' '.$time;
+        $sql="insert into tblinfo values(NULL,'$userID','$firstname','$lastname','$middlename','$email','$bdate','$address','$contact','$dateadded')";
+		if($this->conn->query($sql)){
+			return 'User Added';
+		}else{
+			return $this->conn->error;
+		}
+	}
+    public function displayusers(){
+		$sql="select * from tblinfo order by Firstname";
+		$data=$this->conn->query($sql);
+		return $data;
+	}
 }
 ?>
