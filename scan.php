@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="row justify-content-center"> 
-            <div class="col-md-5 text-center">
+            <div class="col-md-5 text-center" style="min-height:250">
                 <img src="Res/images/LOGO.png" alt="SAFE Logo" style="width:30%;position:relative;z-index:1;" class="rounded-circle">
                 <div id="reader" style="width:100%; margin-top:-4em;"></div>
             </div>
