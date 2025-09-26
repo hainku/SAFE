@@ -59,10 +59,16 @@ Class Product extends Database{
         return $data;
     }
     public function displayscanhistory(){
+        $sql="select h.*,q.ProductID,p.ProductName,p.Image from tblscanhistory h left join tblqrcode q on h.ProductCode=q.ProductCode left join tblproducts p on q.ProductID=p.ProductID order by id DESC limit 30";
+        $data=$this->conn->query($sql);
+        return $data;
+    }
+    public function totalscancount(){
         $sql="select * from tblscanhistory";
         $data=$this->conn->query($sql);
         return $data;
     }
+    
     public function getAuthenticPercentage() {
         $sqlAuthentic = "select COUNT(*) as total_authentic from tblscanhistory where Status='1'";
         $resAuth = $this->conn->query($sqlAuthentic);

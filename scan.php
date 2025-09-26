@@ -38,7 +38,7 @@
 </html>
 
 <script>
-  const html5QrCode = new Html5Qrcode("reader");
+  /*const html5QrCode = new Html5Qrcode("reader");
   html5QrCode.start(
     { facingMode: "environment" }, // back camera
     { fps: 10, qrbox: 250 },
@@ -56,5 +56,28 @@
         xhttp.send();
 
     }
-  ).catch(err => console.error(err));
+  ).catch(err => console.error(err));*/
+
+  const html5QrCode = new Html5Qrcode("reader");
+
+html5QrCode.start(
+  { facingMode: "environment" },
+  { fps: 10, qrbox: 250 },
+  (decodedText, decodedResult) => {
+    html5QrCode.stop().then(() => {
+      console.log("Scanner stopped after first QR");
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          window.open("User/scanresult.php?pcode=" + decodedText, "_self");
+        }
+      };
+      xhttp.open("GET", "Request/savescan.php?productcode=" + decodedText, true);
+      xhttp.send();
+    });
+  }
+).catch(err => console.error(err));
+
+
+
 </script>
