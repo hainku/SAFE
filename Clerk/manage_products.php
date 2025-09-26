@@ -204,9 +204,14 @@
             document.getElementById("pprice").innerHTML=data[0]["Price"];
             document.getElementById("pingredients").innerHTML=data[0]["Ingredients"];
             document.getElementById("pnutrifacts").innerHTML=data[0]["NutritionFacts"];
-             const imge=data[0]["Image"];
+             var imge=data[0]["Image"];
             if(imge==""){imge="default-product.png";}
             document.getElementById("img_edit").src="../Res/images/"+imge;
+             try{
+                document.getElementById("img_edit2").src="../Res/images/"+imge;
+            }catch(err){
+
+            }
         }
     };
     xhttp.open("GET", "../Request/searchproduct.php?pid="+pid, true);
@@ -224,7 +229,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         const searchInput = document.getElementById("searchproduct");
 
-        searchInput.addEventListener("keyup", function() {
+        searchInput.addEventListener("input", function() {
             const query = searchInput.value.trim();
 
             var xhttp = new XMLHttpRequest();
