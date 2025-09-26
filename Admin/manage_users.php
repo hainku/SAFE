@@ -27,7 +27,7 @@
       
         echo'
             <script>
-                alert("'.$u->adduser($userID,$firstname,$lastname,$middlename,$bdate,$address,$contact).'");
+                alert("'.$u->adduser($userID,$firstname,$lastname,$middlename,$email,$bdate,$address,$contact).'");
             </script>
         ';
        
@@ -68,7 +68,7 @@
                           <th></th>
                       </tr>
                     </thead>
-                    <tbody id="scanTable">
+                    <tbody id="userdetails">
                         <?php
                             $data = $u->displayusers();
                             $counter = 1; 
@@ -154,3 +154,22 @@
         </div>
     </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("searchuser");
+
+    searchInput.addEventListener("input", function() {
+        const query = searchInput.value.trim();
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("userdetails").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "../Request/searchuser.php?name=" + encodeURIComponent(query), true);
+        xhttp.send();
+    });
+  });
+</script>
