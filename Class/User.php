@@ -18,10 +18,10 @@ Class User extends Database{
                     return $this->conn->error;
                 }
             }else{
-                echo'New Password Did Not Match!';
+                return 'New Password Did Not Match!';
             }
         }else{
-            echo'Password Incorrect!';
+            return 'Password Incorrect!';
         }
     }
 }
