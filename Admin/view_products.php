@@ -145,7 +145,7 @@
             try{
                 document.getElementById("img_edit2").src="../Res/images/"+imge;
             }catch(err){
-                
+
             }
         }
     };
@@ -164,7 +164,7 @@
     document.addEventListener("DOMContentLoaded", function() {
         const searchInput = document.getElementById("searchproduct");
 
-        searchInput.addEventListener("keyup", function() {
+        searchInput.addEventListener("input", function() {
             const query = searchInput.value.trim();
 
             var xhttp = new XMLHttpRequest();
