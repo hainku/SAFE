@@ -16,7 +16,7 @@
                     <a class="nav-link" href="clerk_homepage.php">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="manage_products.php" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Manage Products
                     </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
@@ -24,6 +24,8 @@
                              <!--li><a class="dropdown-item">Add Product</a></li>
                             <li><a class="dropdown-item" href="#">Products Report</a></li-->
                         </ul>
+                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="#">About Us</a>
                 </li>
