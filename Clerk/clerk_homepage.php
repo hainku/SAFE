@@ -3,6 +3,8 @@
     if(!isset($_SESSION['UserID'])){
         header('Location:../index.php');
     }else{
+      include_once'../Class/Session.php';
+      $s=new Session('clerk','Admin/admin_homepage.php');
   }
 ?>
 
