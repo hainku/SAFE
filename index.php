@@ -164,7 +164,7 @@ if (isset($_POST['btnlogin'])) {
                 <i class="fas fa-qrcode"></i> Scan Product
             </button></a>
             <button type="button" class="btn btn-primary btn-lg shadow" data-bs-toggle="modal" data-bs-target="#adminLoginModal">
-                <i class="fas fa-user-shield"></i> Admin Login
+                <i class="fas fa-user-shield"></i> User Login
             </button>
         </section>
 
