@@ -36,6 +36,14 @@ Class User extends Database{
 			return $this->conn->error;
 		}
 	}
+    public function updateuserinfo($userID,$lastname,$firstname,$middlename,$email,$bdate,$address,$contact){
+        $sql="update tblinfo set Lastname='$lastname',Firstname='$firstname',Middlename='$middlename',Email='$email',Birthdate='$bdate',Address='$address',Contact='$contact' where UserID='$userID'";
+		if($this->conn->query($sql)){
+			return 'User Info Updated';
+		}else{
+			return $this->conn->error;
+		}
+	}
     public function displayusers(){
 		$sql="select * from tblinfo";
 		$data=$this->conn->query($sql);
