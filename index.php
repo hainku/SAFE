@@ -18,7 +18,7 @@ if (isset($_POST['btnlogin'])) {
 
         if ($row['Role'] == 'admin') { 
             echo '<script>window.open("Admin/admin_homepage.php","_self");</script>'; 
-        } else if ($row['Role'] == 'clerk') { 
+        } else if ($row['Role'] == 'Clerk') { 
             echo '<script>window.open("Clerk/clerk_homepage.php","_self");</script>'; 
         } 
     } else { 
