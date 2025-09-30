@@ -19,7 +19,7 @@ while($row = $data->fetch_assoc()){
             <td>'.$row['Birthdate'].'</td>
             <td>'.$row['Address'].'</td>
             <td>'.date("M. d, Y - h:i:s A",$dt).'</td>
-            <td><button type="submit" class="btn btn-success btn-sm" name="viewuser">View</button></td>
+            <td><button type="submit" class="btn btn-success btn-sm" name="viewuser" data-bs-toggle="modal" data-bs-target="#updateUserModal" onclick="userinfo(&quot;'.$row['UserID'].'&quot;,&quot;'.$row['Firstname'].'&quot;,&quot;'.$row['Lastname'].'&quot;,&quot;'.$row['Middlename'].'&quot;,&quot;'.$row['Email'].'&quot;,&quot;'.$row['Birthdate'].'&quot;,&quot;'.$row['Address'].'&quot;,&quot;'.$row['Contact'].'&quot;)">Edit</button></td>
         </tr>
     ';
     $counter++;

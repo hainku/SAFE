@@ -27,11 +27,29 @@
         $address=$_POST['address'];
         $contact=$_POST['contactNumber'];
       
-        echo'
-            <script>
-                alert("'.$u->adduser($userID,$firstname,$lastname,$middlename,$email,$bdate,$address,$contact).'");
-            </script>
-        ';
+        $result = $u->adduser($userID, $firstname, $lastname, $middlename, $email, $bdate, $address, $contact);
+
+        $isSuccess = (stripos($result, 'added') !== false || stripos($result, 'success') !== false);
+
+        $msgJs = json_encode($result);
+
+        echo "
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: " . ($isSuccess ? "'Success'" : "'Error'") . ",
+                    text: {$msgJs},
+                    icon: " . ($isSuccess ? "'success'" : "'error'") . ",
+                    confirmButtonText: 'OK'
+                }).then(function() {
+                    // optional: redirect on success
+                    if (" . ($isSuccess ? 'true' : 'false') . ") {
+                        window.location = 'manage_users.php';
+                    }
+                });
+            });
+          </script>
+        ";
        
     } 
 ?>
@@ -72,6 +90,7 @@
                     </thead>
                     <tbody id="userdetails">
                         <?php
+                            $u=new User(); 
                             $data = $u->displayusers();
                             $counter = 1; 
 
@@ -86,12 +105,12 @@
                                         <td>'.$row['Birthdate'].'</td>
                                         <td>'.$row['Address'].'</td>
                                         <td>'.date("M. d, Y - h:i:s A",$dt).'</td>
-                                        <td><button type="submit" class="btn btn-success btn-sm" name="viewuser">View</button></td>
+                                        <td><button type="submit" class="btn btn-success btn-sm" name="viewuser" data-bs-toggle="modal" data-bs-target="#updateUserModal" onclick="userinfo(&quot;'.$row['UserID'].'&quot;,&quot;'.$row['Firstname'].'&quot;,&quot;'.$row['Lastname'].'&quot;,&quot;'.$row['Middlename'].'&quot;,&quot;'.$row['Email'].'&quot;,&quot;'.$row['Birthdate'].'&quot;,&quot;'.$row['Address'].'&quot;,&quot;'.$row['Contact'].'&quot;)">Edit</button></td>
                                     </tr>
                                 ';
                                 $counter++;
                             }
-                            ?>
+                        ?>
                     </tbody>
                 </table>
               </div>
@@ -112,12 +131,12 @@
               <div class="modal-body">
                 <div class="row">
                   <div class="col-md-4">
-                    <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                    <label for="firstName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" required>
                   </div>
                   <div class="col-md-4">
-                    <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                    <label for="lastName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" required>
                   </div>
                   <div class="col-md-4">
                     <label for="middleName" class="form-label">Middle Name</label>
@@ -157,6 +176,64 @@
     </div>
 </div>
 
+<!-- Update User Modal -->
+<div class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="updateUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fw-bold" id="updateUserModalLabel">Update User Info</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form id="updateUserForm">
+              <div class="modal-body">
+                <div class="row">
+                  <input type="hidden" id="edituserID" name="edituserID">
+                  <div class="col-md-4">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="editlastName" name="editlastName" required>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="editfirstName" name="editfirstName" required>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="middleName" class="form-label">Middle Name</label>
+                    <input type="text" class="form-control" id="editmiddleName" name="editmiddleName" required>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-6">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="editemail" name="editemail" required>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="contactNumber" class="form-label">Contact Number</label>
+                    <input type="number" class="form-control" id="editcontact" name="editcontact" required>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="bDate" class="form-label">Birth Date</label>
+                    <input type="date" class="form-control" id="editbDate" name="editbDate" required>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="editaddress" name="editaddress" required>
+                  </div>
+                </div> 
+              </div>
+              <div class="modal-footer">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <button type="submit" class="btn btn-success" onclick="updateinfo()">Update</button>
+                      </div>
+                  </div>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.getElementById("searchuser");
@@ -174,4 +251,52 @@
         xhttp.send();
     });
   });
+
+  function userinfo(userID, firstname, lastname, middlename, email, birthdate, address, contact) {
+    document.getElementById("edituserID").value = userID;
+    document.getElementById("editfirstName").value = firstname;
+    document.getElementById("editlastName").value = lastname;
+    document.getElementById("editmiddleName").value = middlename;
+    document.getElementById("editemail").value = email;
+    document.getElementById("editbDate").value = birthdate;
+    document.getElementById("editaddress").value = address;
+    document.getElementById("editcontact").value = contact;
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const updateForm = document.getElementById("updateUserForm");
+
+    updateForm.addEventListener("submit", function (e) {
+      e.preventDefault(); 
+
+      const formData = new FormData(updateForm);
+
+      fetch("../Request/updateuserinfo.php", {
+        method: "POST",
+        body: formData
+      })
+        .then(response => response.text())
+        .then(data => {
+          Swal.fire({
+            title: "Update Successful",
+            text: data,
+            icon: "success"
+          }).then(() => {
+            
+            const modal = bootstrap.Modal.getInstance(document.getElementById("updateUserModal"));
+            modal.hide();
+
+            window.location.reload();
+          });
+        })
+        .catch(error => {
+          Swal.fire({
+            title: "Error",
+            text: "Something went wrong: " + error,
+            icon: "error"
+          });
+        });
+    });
+  });
+
 </script>
