@@ -4,7 +4,7 @@
         header('Location:../index.php');
     }else{
         include_once'../Class/Session.php';
-        $s=new Session('clerk','Admin/admin_homepage.php');
+        $s=new Session('Clerk','Admin/admin_homepage.php');
   }
 ?>
 
@@ -91,7 +91,7 @@
             xhttp.send();
         });
         document.getElementById("btnprint").addEventListener("click",function(){
-            window.open("./Report/printqr.php","_new");
+            window.open("../Report/printqr.php","_new");
         });
     });
 </script>
