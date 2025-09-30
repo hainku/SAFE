@@ -29,7 +29,7 @@ Class User extends Database{
 		$time=date('H:i:s');
         $dateadded = $date.' '.$time;
         $sql="insert into tblinfo values(NULL,'$userID','$firstname','$lastname','$middlename','$email','$bdate','$address','$contact','$dateadded');";
-        $sql.="insert into tbluser values(NULL,'$userID','$userID','$lastname','Clerk','1')";
+        $sql.="insert into tbluser values(NULL,'$userID','$userID','$lastname','clerk','1')";
 		if($this->conn->multi_query($sql)){
 			return 'User Added';
 		}else{
