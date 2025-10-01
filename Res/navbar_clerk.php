@@ -15,17 +15,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="clerk_homepage.php">Home</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Manage Products
-                    </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-                            <li><a class="dropdown-item" href="manage_products.php">Product Lists</a></li>
-                             <!--li><a class="dropdown-item">Add Product</a></li>
-                            <li><a class="dropdown-item" href="#">Products Report</a></li-->
-                        </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="manage_products.php">Products</a>
                 </li>
-                
                 <li class="nav-item">
                     <a class="nav-link" href="aboutus.php">About Us</a>
                 </li>

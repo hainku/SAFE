@@ -132,7 +132,7 @@
                         <label for="productDescription" class="form-label">Nutrition Facts</label>
                         <textarea class="form-control" id="nutritionFacts" name="nutritionFacts" rows="3"></textarea>
                     </div>
-                    </div> <div class="mb-3">
+                    <div class="mb-3">
                         <label for="productDescription" class="form-label">Product Photo</label>
                         <input type="file" class="form-control" id="prodPhoto" name="prodPhoto" accept="image/*">
                     </div>

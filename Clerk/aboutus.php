@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SAFE - About Us</title>
     <?php include_once '../Res/includes.php'; ?>
-    <?php include_once '../Res/navbar_admin.php'; ?>
+    <?php include_once '../Res/navbar_clerk.php'; ?>
 
 </head>
 <body class="bg-light">

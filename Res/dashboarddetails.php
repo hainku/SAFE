@@ -69,7 +69,6 @@
         <div class="card-body">
             <div class="d-flex justify-content-between mb-3">
                 <h5 class="card-title">Real-Time Data History</h5>
-                <input type="text" id="searchInput" class="form-control w-25" placeholder="Filter data...">
             </div>
 
             <div class="table-responsive">
@@ -119,17 +118,6 @@
                     </tbody>
                 </table>
             </div>
-
-            <!-- Pagination -->
-            <!--nav>
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav-->
         </div>
     </div>
 </div>

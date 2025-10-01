@@ -4,7 +4,7 @@
         header('Location:../index.php');
     }else{
       include_once'../Class/Session.php';
-      $s=new Session('clerk','Admin/admin_homepage.php');
+      $s=new Session('Clerk','Admin/admin_homepage.php');
   }
 ?>
 
@@ -22,6 +22,4 @@ include_once '../Res/navbar_clerk.php';
 include_once'../Res/dashboarddetails.php';
 ?>
 
-Llst of products
-Filter Products<br>
 
