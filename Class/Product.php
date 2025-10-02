@@ -168,8 +168,8 @@ Class Product extends Database{
             }
         }
     }
-    public function printqr(){
-        $sql="select q.ProductCode,p.ProductName from tblqrcode q inner join tblproducts p on p.ProductID=q.ProductID";
+    public function printqr($gendate){
+        $sql="select q.ProductCode,p.ProductName from tblqrcode q inner join tblproducts p on p.ProductID=q.ProductID where q.DateGenerated='$gendate'";
         $data=$this->conn->query($sql);
         return $data;
     }
@@ -187,6 +187,11 @@ Class Product extends Database{
             return 'Success';
         }
         
+    }
+    public function displayqrlist(){
+        $sql="select q.ProductID,q.DateGenerated,p.ProductName from tblqrcode q inner join tblproducts p on p.ProductID=q.ProductID group by q.DateGenerated order by q.id DESC";
+        $data=$this->conn->query($sql);
+        return $data;
     }
 
 }
