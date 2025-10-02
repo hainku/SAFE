@@ -3,10 +3,12 @@ require('fpdf184/fpdf.php');
 require('phpqrcode/qrlib.php');
 require_once'../Class/Product.php';
 $p=new Product();
-$data=$p->printqr();
+$gendate=$_GET['date'];
+$data=$p->printqr($gendate);
 $prod=[];
 $qrTemp=[];
 $pc=0;
+
 while($row=$data->fetch_assoc()){
     $prod[]=$row;
     $result = $prod[$pc]["ProductCode"]; 
@@ -35,7 +37,7 @@ foreach($prod as $prd){
         $y = 20;   // starting Y
         $col = 1; 
     }
-    $name = 'Coke';
+    $name = $prd["ProductName"];
     $x = $col * 30;
     $pdf->Image($qrTemp[$i], $x, $y, 30, 30);
     $pdf->setXY($x, $y + 27); 

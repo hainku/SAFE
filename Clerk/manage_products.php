@@ -51,7 +51,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Admin Homepage</title>
+        <title>Clerk Homepage</title>
         <?php include_once '../Res/includes.php'; ?>
         <?php include_once '../Res/navbar_clerk.php'; ?>
     </head>
@@ -191,25 +191,59 @@
             </div>
             <div class="modal-footer">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="quantity" class="text-secondary fw-bold">Quantity</label>
                         <input type="number" min="1" class="form-control border-secondary" name="quantity" id="quantity">
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <label for="">&nbsp;</label>
-                        <button class="btn btn-secondary form-control" id="btngenerate">Generate QRCode</button>
+                        <button class="btn btn-secondary form-control" id="btngenerate"><small>Generate QR</small></button>
                     </div>
                     <div class="col-md-3">
+                        <label for="">&nbsp;</label>
+                        <button class="btn btn-secondary form-control" id="btnprintqr"><i class="fa-solid fa-print"></i></button>
+                    </div>
+                    <div class="col-md-2">
                         <label>&nbsp;</label>
                         <div class="d-flex flex-column">
-                            <button class="btn btn-primary form-control mb-2" id="btnedit">Edit</button>
-                            <button class="btn btn-success form-control d-none" id="btnsave">Save</button>
+                            <button class="btn btn-primary form-control mb-2" id="btnedit"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn btn-success form-control d-none" id="btnsave"><i class="fa-solid fa-floppy-disk"></i></button>
                         </div>
                     </div>
 
                     <p class="fst-italic" style="font-size: 10px;">**Put how many QR codes you want to generate</p>
                 </div>
                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- View Product Modal -->
+<div class="modal fade" id="qrcodemodal" tabindex="-1" aria-labelledby="viewProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="viewProductModalLabel">Generated QRCodes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body overflow-auto" style="max-height: 60vh; min-height: 60vh;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label for="qrdate">Choose Product QR</label>
+                            <select class="form-control" name="qrlist" id="qrlist">
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">&nbsp;</label>
+                            <button class="btn btn-primary form-control" id="btnopenprintqr">Print</button>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -247,7 +281,58 @@
         document.getElementById("btngenerate").addEventListener("click",function(){
             const quantity=document.getElementById("quantity").value;
             const pid=document.getElementById("prodid").innerHTML;
-            window.open("generateqr.php?pid="+pid+"&quantity="+quantity,"_new");
+
+           // window.open("generateqr.php?pid="+pid+"&quantity="+quantity,"_new");
+           
+           var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+               
+                Swal.fire({
+                    title: "SAFE",
+                    text: this.responseText,
+                    icon: "success"
+                });
+
+                }
+            };
+            xhttp.open("GET", "generateqr.php?pid="+pid+"&quantity="+quantity, true);
+            xhttp.send();
+           
+        });
+        document.getElementById("btnprintqr").addEventListener("click",function(){
+            var myModal = new bootstrap.Modal(document.getElementById('qrcodemodal'));
+            myModal.show();
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    try{
+                        var data = JSON.parse(this.responseText);
+                        let select = document.getElementById("qrlist");
+                        select.innerHTML = ""; // clear old options
+
+                        // Add a default option
+                        select.innerHTML = "<option value=''>-- Select QR --</option>" 
+                        data.forEach(function (item) {
+                            let option = document.createElement("option");
+                            option.value = item.DateGenerated;   // value for backend use
+                            option.textContent = item.ProductName+" / "+item.ProductID + "("+item.DateGenerated+")"; // text shown to user
+                            select.appendChild(option);
+                        });
+
+                    }catch(e){
+
+                    }
+                }
+            };
+            xhttp.open("GET", "../Request/displayqr.php?op=displayqrlist", true);
+            xhttp.send();
+        });
+
+
+        document.getElementById("btnopenprintqr").addEventListener("click",function(){
+            const qrlist=document.getElementById("qrlist").value;
+            window.open("../Report/printqr.php?date="+qrlist,"_new");
         });
     });
 
