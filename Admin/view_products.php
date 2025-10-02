@@ -47,11 +47,20 @@
     </head>
     <body class="bg-light">
         <div class="container my-5">
-            <div class="row mb-4 align-items-center justify-content-between">
+            <div class="row mb-4 align-items-center justify-content-start">
                 <div class="col-md-3 mb-2 mb-md-0">
                     <form class="d-flex">
                         <input class="form-control me-2" id="searchproduct" type="search" placeholder="Search product..." aria-label="Search">
                     </form>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" id="searchcategory">
+                        <option value="">Search by Category</option>
+                        <option value="Beverages">Beverages</option>
+                        <option value="Snacks">Snacks</option>
+                        <option value="Dairy">Dairy</option>
+                        <option value="Others">Others</option>
+                    </select>
                 </div>
                 
             </div>
@@ -64,9 +73,10 @@
                     echo'
                         <div class="col-sm-6 col-md-4 col-lg-3">
                             <div class="card h-100 shadow-sm">
-                                <img src="../Res/images/'.$img.'" class="card-img-top" alt="'.$row['ProductName'].'">
+                                <img src="../Res/images/'.$img.'" class="card-img-top h-50 w-auto" alt="'.$row['ProductName'].'">
                                 <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">'.$row['ProductName'].'</h5>
+                                <p class="text-secondary mb-1"><small>'.$row['Category'].'</small></p>
                                 <p class="card-text text-muted">'.substr($row['Description'], 0, 100) . (strlen($row['Description']) > 100 ? '...' : '').'</p>
                                 <button class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#viewProductModal" onclick="loaddetails(&quot;'.$row['ProductID'].'&quot;)">View</button>
                                 </div>
@@ -94,6 +104,7 @@
                     <h5 id="pname">Product Name</h5>
                     <input type="text" id="pname_edit" class="form-control d-none"/>
                     <span class="fst-italic" id="prodid" style="display:block; margin-top:-0.7em; display:none;"><small>Product ID</small></span>
+                    <p><span id="pcategory">Category</span></p>
                     <p id="pdesc">Product Description</p>
                     <p><strong>Price:</strong> <span id="pprice">Price</span></p>
                     <p><strong>Ingredients:</strong> <span id="pingredients">Ingredients</span></p>
@@ -104,7 +115,7 @@
             </div>
             <div class="modal-footer">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-7">
                         <label for="quantity" class="text-secondary fw-bold">Quantity</label>
                         <input type="number" min="1" class="form-control border-secondary" name="quantity" id="quantity">
                     </div>
@@ -112,13 +123,7 @@
                         <label for="">&nbsp;</label>
                         <button class="btn btn-secondary form-control" id="btngenerate">Generate QRCode</button>
                     </div>
-                    <div class="col-md-3">
-                        <label>&nbsp;</label>
-                        <div class="d-flex flex-column">
-                            <button class="btn btn-primary form-control mb-2" id="btnedit">Edit</button>
-                            <button class="btn btn-success form-control d-none" id="btnsave">Save</button>
-                        </div>
-                    </div>
+                    
 
                     <p class="fst-italic" style="font-size: 10px;">**Put how many QR codes you want to generate</p>
                 </div>
@@ -137,6 +142,7 @@
             let data=JSON.parse(this.responseText);
             document.getElementById("pname").innerHTML=data[0]["ProductName"];
             document.getElementById("pdesc").innerHTML=data[0]["Description"];
+            document.getElementById("pcategory").innerHTML = data[0]["Category"];
             document.getElementById("prodid").innerHTML=data[0]["ProductID"];
             document.getElementById("pprice").innerHTML=data[0]["Price"];
             document.getElementById("pingredients").innerHTML=data[0]["Ingredients"];
@@ -165,9 +171,11 @@
 
     document.addEventListener("DOMContentLoaded", function() {
         const searchInput = document.getElementById("searchproduct");
+        const searchCategory = document.getElementById("searchcategory");
 
-        searchInput.addEventListener("input", function() {
+        function doSearch() {
             const query = searchInput.value.trim();
+            const category = searchCategory.value;
 
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
@@ -175,73 +183,11 @@
                     document.getElementById("productlist").innerHTML = this.responseText;
                 }
             };
-            xhttp.open("GET", "../Request/searchproductlist.php?productName=" + encodeURIComponent(query), true);
+            xhttp.open("GET", "../Request/searchproductlist.php?productName=" + encodeURIComponent(query) + "&category=" + encodeURIComponent(category), true);
             xhttp.send();
-        });
-    });
+        }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        const btnEdit = document.getElementById("btnedit");
-        const btnSave = document.getElementById("btnsave");
-
-        btnEdit.addEventListener("click", function() {
-            // Turn text into inputs
-            const pname = document.getElementById("pname");
-            pname.outerHTML = `<input type="text" class="form-control mb-2" id="pname" value="${pname.innerText}">`;
-
-            const pdesc = document.getElementById("pdesc");
-            pdesc.outerHTML = `<textarea class="form-control mb-2" id="pdesc">${pdesc.innerText}</textarea>`;
-
-            const pingredients = document.getElementById("pingredients");
-            pingredients.outerHTML = `<textarea class="form-control mb-2" id="pingredients">${pingredients.innerText}</textarea>`;
-
-            const pnutrifacts = document.getElementById("pnutrifacts");
-            pnutrifacts.outerHTML = `<textarea class="form-control mb-2" id="pnutrifacts">${pnutrifacts.innerText}</textarea>`;
-
-            const pprice = document.getElementById("pprice");
-            pprice.outerHTML = `<input type="number" step="0.01" class="form-control mb-2" id="pprice" value="${pprice.innerText}">`;
-
-            // Toggle buttons
-            btnEdit.classList.add("d-none");
-            btnSave.classList.remove("d-none");
-        });
-
-        btnSave.addEventListener("click", function() {
-            const pid = document.getElementById("prodid").innerText;
-            const updatedData = {
-                ProductID: pid,
-                ProductName: document.getElementById("pname").value,
-                Description: document.getElementById("pdesc").value,
-                Ingredients: document.getElementById("pingredients").value,
-                NutritionFacts: document.getElementById("pnutrifacts").value,
-                Price: document.getElementById("pprice").value
-            };
-
-            // AJAX call to update DB
-            const xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "../Request/updateproduct.php", true);
-            xhttp.setRequestHeader("Content-type", "application/json");
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    Swal.fire({
-                    title: "Success",
-                    text: this.responseText,
-                    icon: "success"
-                    });
-
-                    // Replace inputs back with text
-                    document.getElementById("pname").outerHTML = `<h5 id="pname">${updatedData.ProductName}</h5>`;
-                    document.getElementById("pdesc").outerHTML = `<p id="pdesc">${updatedData.Description}</p>`;
-                    document.getElementById("pingredients").outerHTML = `<span id="pingredients">${updatedData.Ingredients}</span>`;
-                    document.getElementById("pnutrifacts").outerHTML = `<span id="pnutrifacts">${updatedData.NutritionFacts}</span>`;
-                    document.getElementById("pprice").outerHTML = `<span id="pprice">${updatedData.Price}</span>`;
-
-                    // Toggle buttons back
-                    btnEdit.classList.remove("d-none");
-                    btnSave.classList.add("d-none");
-                }
-            };
-            xhttp.send(JSON.stringify(updatedData));
-        });
+        searchInput.addEventListener("input", doSearch);
+        searchCategory.addEventListener("change", doSearch);
     });
 </script>

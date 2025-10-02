@@ -8,11 +8,12 @@ if ($data) {
     $productID = $data['ProductID'];
     $productName = $data['ProductName'];
     $description = $data['Description'];
+    $category = $data['Category'];
     $price = $data['Price'];
     $ingredients = $data['Ingredients'];
     $nutritionFacts = $data['NutritionFacts'];
 
-    $result = $p->updateproduct($productID,$productName,$description,$price,$ingredients,$nutritionFacts);
+    $result = $p->updateproduct($productID,$productName,$description,$category,$price,$ingredients,$nutritionFacts);
 
     if ($result) {
         echo "Product updated successfully!";

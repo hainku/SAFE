@@ -1,10 +1,10 @@
 <?php
 require_once'Database.php';
 Class Product extends Database{
-    public function addproducts($productID,$productname,$description,$price,$ingredients,$nutritionfacts,$img){
+    public function addproducts($productID,$productname,$description,$category,$price,$ingredients,$nutritionfacts,$img){
 		$date=date('Y-m-d');
 		$time=date('H:i:s');
-        $sql="insert into tblproducts values(NULL,'$productID','$productname','$description','$price','$ingredients','$nutritionfacts','$img','$date')";
+        $sql="insert into tblproducts values(NULL,'$productID','$productname','$description','$category','$price','$ingredients','$nutritionfacts','$img','$date')";
 		if($this->conn->query($sql)){
 			return 'Product Added';
 		}else{
@@ -21,13 +21,23 @@ Class Product extends Database{
 		$data=$this->conn->query($sql);
 		return $data;
     }
-    public function searchproducts($productName){
-        $sql="select * from tblproducts where ProductName LIKE '%$productName%'";
-		$data=$this->conn->query($sql);
-		return $data;
+    public function searchproducts($productName, $category = '') {
+        $sql = "SELECT * FROM tblproducts WHERE 1=1";
+
+        if (!empty($productName)) {
+            $sql .= " AND (ProductName LIKE '%$productName%' OR Description LIKE '%$productName%')";
+        }
+
+        if (!empty($category)) {
+            $sql .= " AND Category = '$category'";
+        }
+
+        $data = $this->conn->query($sql);
+        return $data;
     }
-    public function updateproduct($productID,$productname,$description,$price,$ingredients,$nutritionfacts){
-		$sql="update tblproducts set ProductName='$productname',Description='$description',Price='$price',Ingredients='$ingredients',NutritionFacts='$nutritionfacts' where ProductID='$productID'";
+
+    public function updateproduct($productID,$productname,$description,$category,$price,$ingredients,$nutritionfacts){
+		$sql="update tblproducts set ProductName='$productname',Description='$description',Category='$category',Price='$price',Ingredients='$ingredients',NutritionFacts='$nutritionfacts' where ProductID='$productID'";
 		if($this->conn->query($sql)){
 			return 'Product Updated!';
 		}else{
@@ -141,9 +151,9 @@ Class Product extends Database{
         }
 
         // Allow certain file formats
-        if (!in_array($imageFileType, ["jpg", "jpeg", "png", "gif"])) {
+        if (!in_array($imageFileType, ["jpg", "jpeg", "png", "gif", "webp"])) {
             $uploadOk = 0;
-            return "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+            return "Sorry, only JPG, JPEG, PNG, WEBP & GIF files are allowed.";
         }
 
         // Final upload

@@ -159,7 +159,7 @@ if (isset($_POST['btnlogin'])) {
         </section>
 
 
-        <section class="text-center my-5">
+        <section class="container text-center my-5">
             <a href="scan.php"><button type="button" class="btn btn-success btn-lg me-3 shadow">
                 <i class="fas fa-qrcode"></i> Scan Product
             </button></a>
