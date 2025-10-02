@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SAFE - About Us</title>
     <?php include_once '../Res/includes.php'; ?>
-    <?php include_once '../Res/navbar_admin.php'; ?>
+    <?php include_once '../Res/navbar_clerk.php'; ?>
 
 </head>
 <body class="bg-light">
@@ -27,25 +27,26 @@
             </div>
         </div>
 
-        <?php
-        $img=['campos','estrella','fanoga','malabag','selverio','telar'];
-        $name=['Rennielle T. Campos','Jane R. Estrella','Charles Francis R. Fanoga','Neil Lenard L. Malabag','Kenneth D. Selverio','Reyvin M. Telar'];
-        $email=['rennielletambaoan@gmail.com','janeestrella018@gmail.com','charlesfanoga5@gmail.com','nlmalabag.mi@gmail.com','selveriokenneth@gmail.com','reyvinmoren.telar@gmail.com'];
-        for($c=0;$c<6;$c++){
-            echo'
-             <div class="row">
-                <div class="col-md-12 d-flex mb-1">
-                    <div> <img height="100px" src="../Res/images/developers/'.$img[$c].'.jpg" alt="'.$img[$c].'"></div>
-                    <div class="flex-grow-1 ms-3">
-                        <div><h5>'.$name[$c].'</h5></div>
-                        <div class="text-primary">'.$email[$c].'</div>
-                    </div>
-                </div>
-                <hr>
-            </div>
-            ';
-        }
-        ?>  
+        <div class="row g-4 mt-5">
+            <?php
+                $img=['campos','estrella','fanoga','malabag','selverio','telar'];
+                $name=['Rennielle T. Campos','Jane R. Estrella','Charles Francis R. Fanoga','Neil Lenard L. Malabag','Kenneth D. Selverio','Reyvin M. Telar'];
+                $email=['rennielletambaoan@gmail.com','janeestrella018@gmail.com','charlesfanoga5@gmail.com','nlmalabag.mi@gmail.com','selveriokenneth@gmail.com','reyvinmoren.telar@gmail.com'];
+                for($c=0;$c<6;$c++){
+                    echo'
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="card h-100 shadow-sm">
+                                <img src="../Res/images/developers/'.$img[$c].'.jpg" class="card-img-top" alt="'.$img[$c].'">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">'.$name[$c].'</h5>
+                                    <div class="text-primary">'.$email[$c].'</div>
+                                </div>
+                            </div>
+                        </div>
+                    ';
+                }
+            ?>  
+        </div>
 
        
     </div>

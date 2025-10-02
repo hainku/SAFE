@@ -22,6 +22,4 @@ include_once '../Res/navbar_clerk.php';
 include_once'../Res/dashboarddetails.php';
 ?>
 
-Llst of products
-Filter Products<br>
 

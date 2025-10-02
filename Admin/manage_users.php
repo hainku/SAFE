@@ -67,8 +67,8 @@
                         <input class="form-control me-2" id="searchuser" type="search" placeholder="Search User..." aria-label="Search">
                     </form>
                 </div>
-                <div class="col-md-6 text-md-end text-center">
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                <div class="col-md-2 text-md-end text-center">
+                    <button class="btn btn-success form-control" data-bs-toggle="modal" data-bs-target="#addUserModal">
                         <i class="bi bi-plus-circle"></i> Add New User
                     </button>
                 </div>

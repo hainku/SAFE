@@ -25,7 +25,8 @@
     $p=new Product(); 
     if(isset($_POST['btnaddproduct'])){ 
         $productname=$_POST['productName']; 
-        $description=$_POST['productDescription']; 
+        $description=$_POST['productDescription'];
+        $category=$_POST['category'];
         $price=$_POST['price'];
         $ingredients=$_POST['ingredients'];
         $nutritionfacts=$_POST['nutritionFacts'];
@@ -37,7 +38,7 @@
         if($res=='success'){
             echo'
                 <script>
-                    alert("'.$p->addproducts($productID,$productname,$description,$price,$ingredients,$nutritionfacts,$imageName).'");
+                    alert("'.$p->addproducts($productID,$productname,$description,$category,$price,$ingredients,$nutritionfacts,$imageName).'");
                 </script>
             ';
         }else{
@@ -62,6 +63,15 @@
                         <input class="form-control me-2" id="searchproduct" type="search" placeholder="Search product..." aria-label="Search">
                     </form>
                 </div>
+                <div class="col-md-2">
+                    <select class="form-control" id="searchcategory">
+                        <option value="">Search by Category</option>
+                        <option value="Beverages">Beverages</option>
+                        <option value="Snacks">Snacks</option>
+                        <option value="Dairy">Dairy</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
                 
                 <div class="col-md-6 text-md-end text-center">
                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">
@@ -82,9 +92,10 @@
                     echo'
                         <div class="col-sm-6 col-md-4 col-lg-3">
                             <div class="card h-100 shadow-sm">
-                                <img src="../Res/images/'.$image.'" class="card-img-top" alt="Product 1">
+                                <img src="../Res/images/'.$image.'" class="card-img-top h-50" alt="Product 1">
                                 <div class="card-body d-flex flex-column">
                                 <h5 class="card-title">'.$row['ProductName'].'</h5>
+                                <p class="text-secondary mb-1"><small>'.$row['Category'].'</small></p>
                                 <p class="card-text text-muted">'.substr($row['Description'], 0, 100) . (strlen($row['Description']) > 100 ? '...' : '').'</p>
                                 <button class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#viewProductModal" onclick="loaddetails(&quot;'.$row['ProductID'].'&quot;)">View</button>
                                 </div>
@@ -121,6 +132,16 @@
                         <textarea class="form-control" id="productDescription" name="productDescription" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-control" id="category" name="category" required>
+                            <option value="" disabled selected>Select category</option>
+                            <option value="Beverages">Beverages</option>
+                            <option value="Snacks">Snacks</option>
+                            <option value="Dairy">Dairy</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="productDescription" class="form-label">Price</label>
                         <input type="number" class="form-control" id="price" name="price" rows="3">
                     </div>
@@ -132,7 +153,7 @@
                         <label for="productDescription" class="form-label">Nutrition Facts</label>
                         <textarea class="form-control" id="nutritionFacts" name="nutritionFacts" rows="3"></textarea>
                     </div>
-                    </div> <div class="mb-3">
+                    <div class="mb-3">
                         <label for="productDescription" class="form-label">Product Photo</label>
                         <input type="file" class="form-control" id="prodPhoto" name="prodPhoto" accept="image/*">
                     </div>
@@ -159,6 +180,7 @@
                     <h5 id="pname">Product Name</h5>
                     <input type="text" id="pname_edit" class="form-control d-none"/>
                     <span class="fst-italic" id="prodid" style="display:block; margin-top:-0.7em; display:none;"><small>Product ID</small></span>
+                    <p><span id="pcategory">Category</span></p>
                     <p id="pdesc">Product Description</p>
                     <p><strong>Price:</strong> <span id="pprice">Price</span></p>
                     <p><strong>Ingredients:</strong> <span id="pingredients">Ingredients</span></p>
@@ -202,6 +224,7 @@
             let data=JSON.parse(this.responseText);
             document.getElementById("pname").innerHTML=data[0]["ProductName"];
             document.getElementById("pdesc").innerHTML=data[0]["Description"];
+            document.getElementById("pcategory").innerHTML = data[0]["Category"];
             document.getElementById("prodid").innerHTML=data[0]["ProductID"];
             document.getElementById("pprice").innerHTML=data[0]["Price"];
             document.getElementById("pingredients").innerHTML=data[0]["Ingredients"];
@@ -230,9 +253,11 @@
 
     document.addEventListener("DOMContentLoaded", function() {
         const searchInput = document.getElementById("searchproduct");
+        const searchCategory = document.getElementById("searchcategory");
 
-        searchInput.addEventListener("input", function() {
+        function doSearch() {
             const query = searchInput.value.trim();
+            const category = searchCategory.value;
 
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
@@ -240,10 +265,14 @@
                     document.getElementById("productlist").innerHTML = this.responseText;
                 }
             };
-            xhttp.open("GET", "../Request/searchproductlist.php?productName=" + encodeURIComponent(query), true);
+            xhttp.open("GET", "../Request/searchproductlist.php?productName=" + encodeURIComponent(query) + "&category=" + encodeURIComponent(category), true);
             xhttp.send();
-        });
+        }
+
+        searchInput.addEventListener("input", doSearch);
+        searchCategory.addEventListener("change", doSearch);
     });
+
 
     document.addEventListener("DOMContentLoaded", function() {
         const btnEdit = document.getElementById("btnedit");
@@ -256,6 +285,10 @@
 
             const pdesc = document.getElementById("pdesc");
             pdesc.outerHTML = `<textarea class="form-control mb-2" id="pdesc">${pdesc.innerText}</textarea>`;
+
+            const pcategory = document.getElementById("pcategory");
+            pcategory.outerHTML = `<input type="text" class="form-control mb-2" id="pcategory" value="${pcategory.innerText}">`;
+
 
             const pingredients = document.getElementById("pingredients");
             pingredients.outerHTML = `<textarea class="form-control mb-2" id="pingredients">${pingredients.innerText}</textarea>`;
@@ -277,6 +310,7 @@
                 ProductID: pid,
                 ProductName: document.getElementById("pname").value,
                 Description: document.getElementById("pdesc").value,
+                Category: document.getElementById("pcategory").value,
                 Ingredients: document.getElementById("pingredients").value,
                 NutritionFacts: document.getElementById("pnutrifacts").value,
                 Price: document.getElementById("pprice").value
@@ -297,6 +331,7 @@
                     // Replace inputs back with text
                     document.getElementById("pname").outerHTML = `<h5 id="pname">${updatedData.ProductName}</h5>`;
                     document.getElementById("pdesc").outerHTML = `<p id="pdesc">${updatedData.Description}</p>`;
+                    document.getElementById("pcategory").outerHTML = `<p id="pcategory">${updatedData.Category}</p>`;
                     document.getElementById("pingredients").outerHTML = `<span id="pingredients">${updatedData.Ingredients}</span>`;
                     document.getElementById("pnutrifacts").outerHTML = `<span id="pnutrifacts">${updatedData.NutritionFacts}</span>`;
                     document.getElementById("pprice").outerHTML = `<span id="pprice">${updatedData.Price}</span>`;
