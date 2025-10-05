@@ -61,16 +61,17 @@
     <?php include_once '../Res/navbar_admin.php'; ?>
     <body class="bg-light">
         <div class="container my-5">
-            <div class="row mb-4 align-items-center justify-content-between">
+            <div class="row mb-4 align-items-center">
                 <div class="col-md-3 mb-2 mb-md-0">
                     <form class="d-flex">
                         <input class="form-control me-2" id="searchuser" type="search" placeholder="Search User..." aria-label="Search">
                     </form>
                 </div>
-                <div class="col-md-2 text-md-end text-center">
-                    <button class="btn btn-success form-control" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                        <i class="bi bi-plus-circle"></i> Add New User
+                <div class="col-md-9 text-md-end text-end">
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                        <i class="fa-solid fa-user-plus"></i> Add New User
                     </button>
+                    <button class="btn btn-primary" id="printalluser"><i class="fa-solid fa-print"></i> Print All Clerk Info</button>
                 </div>
             </div>
             <div class="row g-4 mt-5" id="userslist">
@@ -85,7 +86,7 @@
                           <th>Birth Date</th>
                           <th>Address</th>
                           <th>Date Added</th>
-                          <th></th>
+                          <th class="text-center"><i class="fa-solid fa-bars"></i></th>
                       </tr>
                     </thead>
                     <tbody id="userdetails">
@@ -105,7 +106,10 @@
                                         <td>'.$row['Birthdate'].'</td>
                                         <td>'.$row['Address'].'</td>
                                         <td>'.date("M. d, Y - h:i:s A",$dt).'</td>
-                                        <td><button type="submit" class="btn btn-success btn-sm" name="viewuser" data-bs-toggle="modal" data-bs-target="#updateUserModal" onclick="userinfo(&quot;'.$row['UserID'].'&quot;,&quot;'.$row['Firstname'].'&quot;,&quot;'.$row['Lastname'].'&quot;,&quot;'.$row['Middlename'].'&quot;,&quot;'.$row['Email'].'&quot;,&quot;'.$row['Birthdate'].'&quot;,&quot;'.$row['Address'].'&quot;,&quot;'.$row['Contact'].'&quot;)">Edit</button></td>
+                                        <td class="text-nowrap">
+                                          <button type="submit" class="btn btn-success btn-sm" name="viewuser" data-bs-toggle="modal" data-bs-target="#updateUserModal" onclick="userinfo(&quot;'.$row['UserID'].'&quot;,&quot;'.$row['Firstname'].'&quot;,&quot;'.$row['Lastname'].'&quot;,&quot;'.$row['Middlename'].'&quot;,&quot;'.$row['Email'].'&quot;,&quot;'.$row['Birthdate'].'&quot;,&quot;'.$row['Address'].'&quot;,&quot;'.$row['Contact'].'&quot;)">Edit</button>
+                                          <button type="submit" class="btn btn-primary btn-sm" name="btnprint" onclick="printdata(&quot;'.$row['UserID'].'&quot;)">Print</button>
+                                        </td>
                                     </tr>
                                 ';
                                 $counter++;
@@ -297,6 +301,13 @@
           });
         });
     });
+
+   document.getElementById("printalluser").addEventListener("click",function(){
+    window.open("../Report/printuserlist.php","_new");
+   });
   });
 
+ function printdata(UserID){
+  window.open("../Report/printuserdata.php?userid="+UserID,"_new");
+}
 </script>
