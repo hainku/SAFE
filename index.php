@@ -178,15 +178,15 @@ if (isset($_POST['btnlogin'])) {
                     <div class="modal-body p-4">
                         <form method="POST">
                             <div class="mb-3">
-                                <label for="username" class="form-label fw-semibold">Username</label>
-                                <input type="text" class="form-control rounded-3" id="username" name="username" required>
+                                <label for="username" class="form-label fw-semibold"><i class="fa-solid fa-user"></i> Username</label>
+                                <input type="text" class="form-control rounded-3 text-center" id="username" name="username" required>
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label fw-semibold">Password</label>
-                                <input type="password" class="form-control rounded-3" id="password" name="password" required>
+                                <label for="password" class="form-label fw-semibold"><i class="fa-solid fa-key"></i> Password</label>
+                                <input type="password" class="form-control rounded-3 text-center" id="password" name="password" required>
                             </div>
                             <div class="d-grid">
-                                <button type="submit" name="btnlogin" class="btn btn-primary rounded-3 fw-semibold">Login</button>
+                                <button type="submit" name="btnlogin" class="btn btn-primary rounded-3 fw-semibold"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
                             </div>
                         </form>
                     </div>

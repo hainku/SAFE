@@ -73,15 +73,17 @@
                     </select>
                 </div>
                 
-                <div class="col-md-6 text-md-end text-center">
+                <div class="col-md-6 text-md-end text-end">
                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">
                         <i class="bi bi-plus-circle"></i> Add Product
                     </button>
                     <a href="../Report/productlist.php" target="new">
                         <button class="btn btn-secondary">
-                            <i class="bi bi-plus-circle"></i> Print Product List
+                            <i class="fa-solid fa-print"></i> Print Product List
                         </button>
                     </a>
+
+                    <button class="btn btn-secondary" id="btnprintqr"><i class="fa-solid fa-print"></i>Print QRCode</button>
                 </div>
             </div>
             <div class="row g-4 mt-5" id="productlist">
@@ -198,10 +200,6 @@
                     <div class="col-md-4">
                         <label for="">&nbsp;</label>
                         <button class="btn btn-secondary form-control" id="btngenerate"><small>Generate QR</small></button>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="">&nbsp;</label>
-                        <button class="btn btn-secondary form-control" id="btnprintqr"><i class="fa-solid fa-print"></i></button>
                     </div>
                     <div class="col-md-2">
                         <label>&nbsp;</label>
