@@ -36,43 +36,34 @@ if (isset($_POST['btnlogin'])) {
         <?php include_once 'Res/includes.php'; ?>
         <style>
             .carousel-item img {
-            width: 100%;
-            height: 100vh;
-            object-fit: cover;
+                width: 100%;
+                height: 100vh;
+                object-fit: cover;
             }
 
+            /* Caption background and text styling */
             .carousel-caption {
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            padding: 1.5rem;
+                background: rgba(0, 0, 0, 0.5);
+                border-radius: 10px;
+                padding: 1.5rem;
             }
 
-            .feature-box {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            }
-            .feature-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            }
-
-            .btn-lg {
-            padding: 0.8rem 2rem;
-            font-size: 1.1rem;
-            }
-
-            .modal-content {
-            border-radius: 15px;
-            border: none;
-            }
-            .modal-header {
-            border-bottom: none;
-            }
-            .modal-body {
-            background: #f9f9f9;
-            border-radius: 10px;
+            /* Make the carousel more responsive on mobile */
+            @media (max-width: 992px) {
+                .carousel-item img {
+                    height: 70vh; /* reduce height on tablets */
+                }
             }
 
             @media (max-width: 768px) {
+                .carousel-item img {
+                    height: 50vh; /* let image auto-adjust on small screens */
+                }
+                .carousel-caption {
+                    bottom: 2rem;
+                    background: rgba(0, 0, 0, 0.6);
+                    padding: 1rem;
+                }
                 .carousel-caption h2 {
                     font-size: 1.5rem;
                 }
@@ -83,7 +74,8 @@ if (isset($_POST['btnlogin'])) {
 
             @media (max-width: 576px) {
                 .carousel-caption {
-                    padding: 1rem;
+                    bottom: 1rem;
+                    padding: 0.8rem;
                 }
                 .carousel-caption h2 {
                     font-size: 1.25rem;
@@ -97,6 +89,7 @@ if (isset($_POST['btnlogin'])) {
                     margin-bottom: 10px;
                 }
             }
+
         </style>
     </head>
     <body class="bg-light">

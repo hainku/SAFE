@@ -193,11 +193,11 @@
             </div>
             <div class="modal-footer">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <label for="quantity" class="text-secondary fw-bold">Quantity</label>
                         <input type="number" min="1" class="form-control border-secondary" name="quantity" id="quantity">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <label for="">&nbsp;</label>
                         <button class="btn btn-secondary form-control" id="btngenerate"><small>Generate QR</small></button>
                     </div>

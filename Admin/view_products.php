@@ -114,7 +114,7 @@
             
             </div>
             <div class="modal-footer">
-                <div class="row">
+                <!--div class="row">
                     <div class="col-md-7">
                         <label for="quantity" class="text-secondary fw-bold">Quantity</label>
                         <input type="number" min="1" class="form-control border-secondary" name="quantity" id="quantity">
@@ -126,7 +126,7 @@
                     
 
                     <p class="fst-italic" style="font-size: 10px;">**Put how many QR codes you want to generate</p>
-                </div>
+                </div-->
                
             </div>
         </div>
