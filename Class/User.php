@@ -2,9 +2,17 @@
 require_once'Database.php';
 Class User extends Database{
     public function login($un,$pw){
-        $sql="select * from tbluser where Username='$un' and Password='$pw'";
+        $sql="select * from tbluser where Username='$un' and Password='$pw' and Status=1";
         $data=$this->conn->query($sql);
         return $data;
+    }
+    public function changestatus($userid,$status){
+        $sql="update tbluser set Status='$status' where UserID='$userid'";
+        if($this->conn->query($sql)){
+            return 'Status Changed';
+        }else{
+            return $this->conn->error;
+        }
     }
     public function changepassword($userid,$pw,$npw1,$npw2){
         $sql="select * from tbluser where UserID='$userid' and Password='$pw'";
@@ -45,7 +53,7 @@ Class User extends Database{
 		}
 	}
     public function displayusers(){
-		$sql="select * from tblinfo";
+		$sql="select i.*,u.Status from tblinfo i inner join tbluser u on i.UserID=u.UserID";
 		$data=$this->conn->query($sql);
 		return $data;
 	}

@@ -86,6 +86,7 @@
                           <th>Birth Date</th>
                           <th>Address</th>
                           <th>Date Added</th>
+                          <th>Status</th>
                           <th class="text-center"><i class="fa-solid fa-bars"></i></th>
                       </tr>
                     </thead>
@@ -96,6 +97,11 @@
                             $counter = 1; 
 
                             while($row = $data->fetch_assoc()){
+                              if($row['Status']==1){
+                                $chk='checked';
+                              }else{
+                                $chk='';
+                              }
                                 $dt=strtotime($row['DateAdded']);
                                 echo '
                                     <tr>
@@ -106,6 +112,7 @@
                                         <td>'.$row['Birthdate'].'</td>
                                         <td>'.$row['Address'].'</td>
                                         <td>'.date("M. d, Y - h:i:s A",$dt).'</td>
+                                        <td class="text-center"><input type="checkbox" onclick="changestatus(this)" value="'.$row['UserID'].'" '.$chk.'></td>
                                         <td class="text-nowrap">
                                           <button type="submit" class="btn btn-success btn-sm" name="viewuser" data-bs-toggle="modal" data-bs-target="#updateUserModal" onclick="userinfo(&quot;'.$row['UserID'].'&quot;,&quot;'.$row['Firstname'].'&quot;,&quot;'.$row['Lastname'].'&quot;,&quot;'.$row['Middlename'].'&quot;,&quot;'.$row['Email'].'&quot;,&quot;'.$row['Birthdate'].'&quot;,&quot;'.$row['Address'].'&quot;,&quot;'.$row['Contact'].'&quot;)">Edit</button>
                                           <button type="submit" class="btn btn-primary btn-sm" name="btnprint" onclick="printdata(&quot;'.$row['UserID'].'&quot;)">Print</button>
@@ -309,5 +316,21 @@
 
  function printdata(UserID){
   window.open("../Report/printuserdata.php?userid="+UserID,"_new");
+}
+function changestatus(chk){
+  var stat;
+  if(chk.checked==true){
+    stat=1;
+  }else{
+    stat=0;
+  }
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     alert(this.responseText);
+    }
+  };
+  xhttp.open("GET", "../Request/changestatus.php?userid="+chk.value+"&&status="+stat, true);
+  xhttp.send();
 }
 </script>
