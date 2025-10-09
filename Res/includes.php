@@ -3,3 +3,4 @@
 <script src="/SAFE/Res/bootstrap-5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/SAFE/Res/jscript.js"></script>
 <script src="/SAFE/Res/sweetalert2@11.js"></script>
+  <link rel="icon" type="image/png" href="/SAFE/Res/images/LOGO.png">
