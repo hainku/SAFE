@@ -193,6 +193,39 @@ Class Product extends Database{
         $data=$this->conn->query($sql);
         return $data;
     }
-
+    public function addcategory($categoryname){
+        $sql="insert into tblcategory values(NULL,'$categoryname')";
+		if($this->conn->query($sql)){
+			return 'Category Added';
+		}else{
+			return $this->conn->error;
+		}
+	}
+    public function displaycategories(){
+		$sql="select * from tblcategory";
+		$data=$this->conn->query($sql);
+		return $data;
+	}
+    public function searchcategories($categoryname){
+		$sql="select * from tblcategory where CategoryName LIKE '%$categoryname%'";
+		$data=$this->conn->query($sql);
+		return $data;
+	}
+    public function updatecategory($categoryID,$categoryname){
+		$sql="update tblcategory set CategoryName='$categoryname' where id='$categoryID'";
+		if($this->conn->query($sql)){
+			return 'Category Updated!';
+		}else{
+			return $this->conn->error;
+		}
+	}
+    public function deletecategory($categoryID){
+		$sql="delete from tblcategory where id='$categoryID'";
+		if($this->conn->query($sql)){
+			return 'Category Deleted';
+		}else{
+			return $this->conn->error;
+		}
+	}
 }
 ?>

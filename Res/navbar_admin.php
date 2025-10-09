@@ -15,8 +15,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="admin_homepage.php">Dashboard</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="view_products.php">Products</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Products
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                        <li><a class="dropdown-item" href="view_products.php">Products Lists</a></li>
+                        <li><a class="dropdown-item" href="add_category.php">Manage Category</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="manage_users.php">Manage User</a>

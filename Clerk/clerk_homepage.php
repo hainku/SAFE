@@ -20,6 +20,7 @@
 <?php
 include_once '../Res/navbar_clerk.php';
 include_once'../Res/dashboarddetails.php';
+include_once'../Res/footer_clerk.php';
 ?>
 
 
