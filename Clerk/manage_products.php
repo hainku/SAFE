@@ -66,6 +66,7 @@
             </script>
         ';
     }
+    
 ?>
 
         <div class="container my-5">
@@ -77,11 +78,16 @@
                 </div>
                 <div class="col-md-2">
                     <select class="form-control" id="searchcategory">
-                        <option value="">Search by Category</option>
-                        <option value="Beverages">Beverages</option>
-                        <option value="Snacks">Snacks</option>
-                        <option value="Dairy">Dairy</option>
-                        <option value="Others">Others</option>
+                        <option value="" selected disabled>Search by Category</option>
+                        <option value="All">All</option>
+                        <?php
+                            $datacat=$p->displaycategory();
+                            while($row=$datacat->fetch_assoc()){
+                                echo'
+                                    <option>'.$row['CategoryName'].'</option>
+                                ';
+                            }
+                        ?>
                     </select>
                 </div>
                 
@@ -157,10 +163,14 @@
                         <label for="category" class="form-label">Category</label>
                         <select class="form-control" id="category" name="category" required>
                             <option value="" disabled selected>Select category</option>
-                            <option value="Beverages">Beverages</option>
-                            <option value="Snacks">Snacks</option>
-                            <option value="Dairy">Dairy</option>
-                            <option value="Others">Others</option>
+                             <?php
+                            $datacat=$p->displaycategory();
+                            while($row=$datacat->fetch_assoc()){
+                                echo'
+                                    <option>'.$row['CategoryName'].'</option>
+                                ';
+                            }
+                        ?>
                         </select>
                     </div>
                     <div class="mb-3">
