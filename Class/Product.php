@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Asia/Manila");
 require_once'Database.php';
 Class Product extends Database{
     public function addproducts($productID,$productname,$description,$category,$price,$ingredients,$nutritionfacts,$img){
