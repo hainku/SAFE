@@ -17,6 +17,11 @@ Class Product extends Database{
 		$data=$this->conn->query($sql);
 		return $data;
 	}
+    public function displaycategory(){
+		$sql="select * from tblcategory order by CategoryName";
+		$data=$this->conn->query($sql);
+		return $data;
+	}
     public function displayproductbyid($pid){
         $sql="select * from tblproducts where ProductID='$pid'";
 		$data=$this->conn->query($sql);
@@ -33,6 +38,9 @@ Class Product extends Database{
             $sql .= " AND Category = '$category'";
         }
 
+        if($category=='All'){
+            $sql="select * from tblproducts order by ProductName";
+        }
         $data = $this->conn->query($sql);
         return $data;
     }
