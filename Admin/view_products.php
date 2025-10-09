@@ -87,6 +87,9 @@
             ?>
             </div>
         </div>
+        <?php
+            include_once'../Res/footer_admin.php';
+        ?>
     </body>
 </html>
 

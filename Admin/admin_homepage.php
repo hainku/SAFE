@@ -23,6 +23,7 @@
 <body class="bg-light">
 <?php
 include_once'../Res/dashboarddetails.php';
+include_once'../Res/footer_admin.php';
 ?>
 </body>
 </html>

@@ -125,6 +125,9 @@
             ?>
             </div>
         </div>
+        <?php
+            include_once'../Res/footer_clerk.php';
+        ?>
     </body>
 </html>
 
