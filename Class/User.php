@@ -68,7 +68,7 @@ Class User extends Database{
         return $data;
     }
     public function showallusers(){
-        $sql="select i.*,u.Username,u.Password,u.Role from tblinfo i inner join tbluser u on i.UserID=u.UserID order by i.Lastname";
+        $sql="select i.*,u.Username,u.Password,u.Role from tblinfo i inner join tbluser u on i.UserID=u.UserID where u.Status=1 order by i.Lastname";
          $data = $this->conn->query($sql);
         return $data;
     }

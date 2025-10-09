@@ -7,6 +7,16 @@
         $s=new Session('clerk','Admin/admin_homepage.php');
   }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Clerk Homepage</title>
+        <?php include_once '../Res/includes.php'; ?>
+        <?php include_once '../Res/navbar_clerk.php'; ?>
+    </head>
+    <body class="bg-light">
 
 <?php 
     function generateProductID($length = 5) {
@@ -44,18 +54,20 @@
         }else{
             echo $res;
         }
-    } 
+    } else if(isset($_POST['btndelete'])){
+        $pid=$_POST['btndelete'];
+        echo'
+            <script>
+                Swal.fire({
+                    title: "Delete Product",
+                    text: "'.$p->deleteproduct($pid).'",
+                    icon: "success"
+                });
+            </script>
+        ';
+    }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Clerk Homepage</title>
-        <?php include_once '../Res/includes.php'; ?>
-        <?php include_once '../Res/navbar_clerk.php'; ?>
-    </head>
-    <body class="bg-light">
+
         <div class="container my-5">
             <div class="row mb-4 align-items-center justify-content-between">
                 <div class="col-md-3 mb-2 mb-md-0">
@@ -94,14 +106,19 @@
                     echo'
                         <div class="col-sm-6 col-md-4 col-lg-3">
                             <div class="card h-100 shadow-sm">
-                                <img src="../Res/images/'.$image.'" class="card-img-top h-50" alt="Product 1">
-                                <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">'.$row['ProductName'].'</h5>
-                                <p class="text-secondary mb-1"><small>'.$row['Category'].'</small></p>
-                                <p class="card-text text-muted">'.substr($row['Description'], 0, 100) . (strlen($row['Description']) > 100 ? '...' : '').'</p>
-                                <button class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#viewProductModal" onclick="loaddetails(&quot;'.$row['ProductID'].'&quot;)">View</button>
+                                <img src="../Res/images/'.$image.'" class="position-relative card-img-top h-50" alt="Product 1">
+                                <div class="position-absolute">
+                                    <form method="POST">
+                                        <button class="btn shadow-none text-secondary" name="btndelete" value="'.$row['ProductID'].'"><i class="fa-solid fa-trash"></i></button>
+                                    </form>
                                 </div>
-                            </div>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">'.$row['ProductName'].'</h5>
+                                    <p class="text-secondary mb-1"><small>'.$row['Category'].'</small></p>
+                                    <p class="card-text text-muted">'.substr($row['Description'], 0, 100) . (strlen($row['Description']) > 100 ? '...' : '').'</p>
+                                    <button class="btn btn-primary mt-auto" data-bs-toggle="modal" data-bs-target="#viewProductModal" onclick="loaddetails(&quot;'.$row['ProductID'].'&quot;)">View</button>
+                                    </div>
+                                </div>
                         </div>
                     ';
                 }
