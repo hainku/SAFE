@@ -35,7 +35,14 @@ Class Product extends Database{
         $data = $this->conn->query($sql);
         return $data;
     }
-
+    public function deleteproduct($productid){
+		$sql="delete from tblproducts where ProductID='$productid'";
+		if($this->conn->query($sql)){
+			return 'Product Deleted!';
+		}else{
+			return $this->conn->error;
+		}
+	}
     public function updateproduct($productID,$productname,$description,$category,$price,$ingredients,$nutritionfacts){
 		$sql="update tblproducts set ProductName='$productname',Description='$description',Category='$category',Price='$price',Ingredients='$ingredients',NutritionFacts='$nutritionfacts' where ProductID='$productID'";
 		if($this->conn->query($sql)){
