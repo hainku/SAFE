@@ -12,6 +12,11 @@ while ($row = $data->fetch_assoc()) {
     echo '
         <div class="col-sm-6 col-md-4 col-lg-3">
             <div class="card h-100 shadow-sm">
+                <div class="position-absolute">
+                    <form method="POST">
+                        <button class="btn shadow-none text-secondary" name="btndelete" value="'.$row['ProductID'].'"><i class="fa-solid fa-trash"></i></button>
+                    </form>
+                </div>
                 <img id="img_edit2" src="../Res/images/'.$img.'" class="card-img-top h-50" alt="Product Image">
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title" style="font-size:20px;">'.($row['ProductName']).'</h5>
